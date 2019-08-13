@@ -112,29 +112,39 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
-function createArticle(arr) {
+function createArticle(obj) {
+  // Append all elements to this main div
+  let mainDiv = document.querySelector(".articles")
+
   // creating article div
   let articleDiv = document.createElement("div");
   articleDiv.setAttribute("class", "article");
+  mainDiv.appendChild(articleDiv);
 
   // creating h2
   let articleH2 = document.createElement("h2");
-  articleH2.textContent = arr[0]["title"];
+  articleH2.textContent = obj.title;
+  articleDiv.appendChild(articleH2);
   
-  // creating paragraph
-  let articleParagraph = document.createElement("p");
-  articleParagraph.textContent = arr[0]["firstParagrap"];
+  // creating date paragraph
+  let dateParagraph = document.createElement("p");
+  dateParagraph.setAttribute("class", "date")
+  dateParagraph.textContent = obj.date;
+  articleDiv.appendChild(dateParagraph);
+
+  // creating the 3 new paragraphs
+  for (let i = 0; i < 3; i++) {
+    let objArray = ["first", "second", "third"];
+    let newP = document.createElement("p");
+    let placeholder = objArray[i] + "Paragraph"
+    newP.textContent = obj[placeholder];
+    articleDiv.appendChild(newP);
+  }
 
   // creating span
   let articleSpan = document.createElement("span");
   articleSpan.setAttribute("class", "expandButton");
-
-  // appending all children to parents
-  let mainDiv = document.querySelector(".articles")
-  mainDiv.appendChild(articleDiv);
-  articleDiv.appendChild(articleH2);
-  articleDiv.appendChild(articleParagraph);
   articleDiv.appendChild(articleSpan);
 }
 
-createArticle.apply(this, data);
+createArticle(data[0]);
