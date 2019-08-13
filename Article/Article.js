@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'My Name is Ken',
+    date: 'Aug 13, 2019',
+    firstParagraph: 'Hello, my name is Ken.  I love my family.  I have a wife, a 6 month old baby girl, and a little puppy dog.',
+    secondParagraph: 'Hello, my name is Ken.  I love my family.  I have a wife, a 6 month old baby girl, and a little puppy dog.',
+    thirdParagraph: 'Hello, my name is Ken.  I love my family.  I have a wife, a 6 month old baby girl, and a little puppy dog.'
   }
 ];
 
@@ -109,7 +116,7 @@ const data = [
 
   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
+  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article
 
 */
 function createArticle(obj) {
@@ -144,7 +151,11 @@ function createArticle(obj) {
   // creating span
   let articleSpan = document.createElement("span");
   articleSpan.setAttribute("class", "expandButton");
+  articleSpan.textContent = "Show More";
+  articleSpan.addEventListener("click", () => {
+    articleDiv.classList.toggle("article-open");
+  });
   articleDiv.appendChild(articleSpan);
 }
 
-createArticle(data[0]);
+data.map(n => createArticle(n));
