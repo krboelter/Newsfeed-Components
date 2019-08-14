@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'My Name is Ken',
+    date: 'Aug 13, 2019',
+    firstParagraph: 'Hello, my name is Ken.  I love my family.  I have a wife, a 6 month old baby girl, and a little puppy dog.',
+    secondParagraph: 'Hello, my name is Ken.  I love my family.  I have a wife, a 6 month old baby girl, and a little puppy dog.',
+    thirdParagraph: 'Hello, my name is Ken.  I love my family.  I have a wife, a 6 month old baby girl, and a little puppy dog.'
   }
 ];
 
@@ -109,6 +116,46 @@ const data = [
 
   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
+  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article
 
 */
+function createArticle(obj) {
+  // Append all elements to this main div
+  let mainDiv = document.querySelector(".articles")
+
+  // creating article div
+  let articleDiv = document.createElement("div");
+  articleDiv.setAttribute("class", "article");
+  mainDiv.appendChild(articleDiv);
+
+  // creating h2
+  let articleH2 = document.createElement("h2");
+  articleH2.textContent = obj.title;
+  articleDiv.appendChild(articleH2);
+  
+  // creating date paragraph
+  let dateParagraph = document.createElement("p");
+  dateParagraph.setAttribute("class", "date")
+  dateParagraph.textContent = obj.date;
+  articleDiv.appendChild(dateParagraph);
+
+  // creating the 3 new paragraphs
+  for (let i = 0; i < 3; i++) {
+    let objArray = ["first", "second", "third"];
+    let newP = document.createElement("p");
+    let placeholder = objArray[i] + "Paragraph"
+    newP.textContent = obj[placeholder];
+    articleDiv.appendChild(newP);
+  }
+
+  // creating span
+  let articleSpan = document.createElement("span");
+  articleSpan.setAttribute("class", "expandButton");
+  articleSpan.textContent = "Show More";
+  articleSpan.addEventListener("click", () => {
+    articleDiv.classList.toggle("article-open");
+  });
+  articleDiv.appendChild(articleSpan);
+}
+
+data.map(n => createArticle(n));
